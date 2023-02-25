@@ -35,5 +35,16 @@ namespace AdoNetLib
                 await connection.CloseAsync();
             }
         }
+        public SqlConnection GetConnection()
+        {
+            if (connection.State == ConnectionState.Open)
+            {
+                return connection;
+            }
+            else
+            {
+                throw new Exception("Подключение уже закрыто!");
+            }
+        }
     }
 }
