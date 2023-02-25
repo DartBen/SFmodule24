@@ -2,9 +2,9 @@
 {
     public static class ConnectionString
     {
-        public static string MsSqlConnection => @"Data Source= .\DESKTOP-BC8P93V;
+        public static string MsSqlConnection => @"Data Source= .\SQLEXPRESS;
                                                     Database=testing; 
-                                                    Connect Timeout=10; 
-                                                    Trusted_Connection=True ";
+                                                    Trusted_Connection=True;
+                                                    Connect Timeout=3; ";
     }
 }
