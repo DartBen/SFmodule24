@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
 using System.Linq;
+using System.Runtime.Intrinsics.Arm;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -58,6 +59,33 @@ namespace AdoNetLib
             };
 
             return command.ExecuteNonQuery();
+        }
+        public int ExecProcedureAdding(string name, string login)
+        {
+            var command = new SqlCommand
+            {
+                CommandType = CommandType.StoredProcedure,
+                CommandText = "AddingUserProc",
+                Connection = connector.GetConnection(),
+            };
+
+            command.Parameters.Add(new SqlParameter("@Name", name));
+            command.Parameters.Add(new SqlParameter("@Login", login));
+
+            return command.ExecuteNonQuery();
+        }
+
+        public int UpdateByColumn(string table, string columntocheck, string valuecheck, string columntoupdate, string valueupdate)
+        {
+            var command = new SqlCommand
+            {
+                CommandType = CommandType.Text,
+                CommandText = "update   " + table + " set " + columntoupdate + " = '" + valueupdate + "'  where " + columntocheck + " = '" + valuecheck + "';",
+                Connection = connector.GetConnection(),
+            };
+
+            return command.ExecuteNonQuery();
+
         }
     }
 }
